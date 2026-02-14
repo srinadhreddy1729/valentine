@@ -3,12 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine 💌</title>
+<title>Valentine · escape 20px+</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
 body{
   min-height:100vh;
@@ -17,16 +21,18 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
+  padding:16px;
   overflow:hidden;
 }
 
-/* 🌸 Falling flowers & love symbols */
+/* Floating symbols */
 .fall{
   position:absolute;
-  top:-50px;
+  top:-60px;
   animation:fall linear forwards;
   pointer-events:none;
   z-index:1;
+  user-select:none;
 }
 
 @keyframes fall{
@@ -38,68 +44,73 @@ body{
 
 /* Card */
 .valentine-card{
-  width:580px;
-  max-width:92vw;
-  background:rgba(255,245,250,0.8);
+  width:620px;
+  max-width:94vw;
+  background:rgba(255,245,250,0.85);
   backdrop-filter:blur(15px);
   border-radius:60px;
   box-shadow:0 30px 50px rgba(200,100,140,0.4);
-  padding:3rem 2rem;
+  padding:2.8rem 1.5rem;
   text-align:center;
   position:relative;
   z-index:10;
 }
 
 h1{
-  font-size:2.5rem;
+  font-size:2.4rem;
   color:#93264b;
-  margin-bottom:2.5rem;
+  margin-bottom:2.2rem;
+}
+
+/* Button container */
+.button-swarm{
+  position:relative;
+  height:110px;
 }
 
 /* Buttons */
-.button-swarm{
-  position:relative;
-  height:90px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 40px;
-}
-
 .btn{
+  position:absolute;
   border:none;
-  padding:16px 50px;
+  padding:16px 44px;
   border-radius:80px;
-  font-size:1.5rem;
+  font-size:1.4rem;
   font-weight:700;
   cursor:pointer;
   border:2px solid white;
+  white-space:nowrap;
 }
 
+/* YES button */
 #yesBtn{
+  right:25px;
+  top:50%;
+  transform:translateY(-50%);
   background:linear-gradient(145deg,#ff4d6d,#e63256);
   color:white;
+  z-index:5;
 }
 
 #yesBtn:hover{
-  transform:scale(1.05);
+  transform:translateY(-50%) scale(1.05);
 }
 
+/* NO button */
 #noBtn{
-  position:absolute;
-  right:40px;
+  left:25px;
   top:50%;
   transform:translateY(-50%);
   background:#ffb7c5;
   color:#491d2b;
-  transition:left 0.25s ease, top 0.25s ease;
+  transition:left 0.1s linear, top 0.1s linear;
+  z-index:10;
 }
 
 /* Reveal */
 .reveal{
   display:none;
   margin-top:2rem;
-  animation:pop 0.6s ease forwards;
+  animation:pop 0.5s ease forwards;
 }
 
 @keyframes pop{
@@ -108,22 +119,122 @@ h1{
 }
 
 .couple{
-  font-size:5rem;
-  animation:float 1.2s infinite alternate;
-}
-
-@keyframes float{
-  from{transform:translateY(0);}
-  to{transform:translateY(-12px);}
+  font-size:4rem;
 }
 
 .love-text{
-  font-size:2rem;
-  margin-top:1rem;
+  font-size:1.8rem;
   font-weight:700;
   color:#982b52;
+  margin-top:1rem;
 }
 
+/* Responsive - added comprehensive media queries */
+@media(max-width:768px){
+  h1{font-size:2rem;}
+  .btn{font-size:1.2rem;padding:14px 28px;}
+}
+
+@media(max-width:480px){
+  h1{font-size:1.6rem;}
+  .btn{font-size:1rem;padding:12px 22px;}
+}
+
+/* Additional responsive refinements */
+@media(max-width:400px){
+  .valentine-card{
+    padding:1.8rem 0.8rem;
+    border-radius:40px;
+  }
+  h1{
+    font-size:1.4rem;
+    margin-bottom:1.5rem;
+  }
+  .button-swarm{
+    height:90px;
+  }
+  #yesBtn{
+    right:15px;
+    padding:10px 18px;
+    font-size:0.9rem;
+  }
+  #noBtn{
+    left:15px;
+    padding:10px 18px;
+    font-size:0.9rem;
+  }
+  .couple{
+    font-size:3rem;
+  }
+  .love-text{
+    font-size:1.3rem;
+  }
+}
+
+@media(max-width:360px){
+  .btn{
+    padding:8px 14px;
+    font-size:0.8rem;
+  }
+  #yesBtn{
+    right:10px;
+  }
+  #noBtn{
+    left:10px;
+  }
+  .couple{
+    font-size:2.5rem;
+  }
+  .love-text{
+    font-size:1.1rem;
+  }
+}
+
+/* Tablet landscape and small desktops */
+@media(min-width:769px) and (max-width:1024px){
+  .valentine-card{
+    width:580px;
+    padding:2.5rem 1.2rem;
+  }
+  h1{
+    font-size:2.2rem;
+  }
+}
+
+/* Very small height adjustment */
+@media(max-height:600px){
+  .valentine-card{
+    padding:1.5rem 1rem;
+  }
+  h1{
+    margin-bottom:1rem;
+    font-size:1.8rem;
+  }
+  .button-swarm{
+    height:80px;
+  }
+}
+
+/* Large screens */
+@media(min-width:1400px){
+  .valentine-card{
+    width:700px;
+    padding:3.5rem 2rem;
+  }
+  h1{
+    font-size:2.8rem;
+  }
+  .btn{
+    font-size:1.6rem;
+    padding:18px 50px;
+  }
+  .couple{
+    font-size:5rem;
+  }
+  .love-text{
+    font-size:2.2rem;
+  }
+}
 </style>
 </head>
 <body>
@@ -131,9 +242,9 @@ h1{
 <div class="valentine-card">
   <h1 id="question">Will you be my Valentine? 💌</h1>
 
-  <div class="button-swarm">
-    <button class="btn" id="yesBtn">Yes 💖</button>
+  <div class="button-swarm" id="swarm">
     <button class="btn" id="noBtn">No 😘</button>
+    <button class="btn" id="yesBtn">Yes 💖</button>
   </div>
 
   <div class="reveal" id="reveal">
@@ -145,97 +256,108 @@ h1{
 <script>
 (function(){
 
-const noBtn=document.getElementById("noBtn");
-const yesBtn=document.getElementById("yesBtn");
-const reveal=document.getElementById("reveal");
-const question=document.getElementById("question");
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const reveal = document.getElementById("reveal");
+const question = document.getElementById("question");
+const swarm = document.getElementById("swarm");
 
-let answered=false;
-let lastMoveTime=0;
+let answered = false;
 
-/* Smooth small escape */
-function moveSlight(mouseX,mouseY){
+/* Move NO button away from cursor */
+function moveAway(cursorX, cursorY){
 
-  const now=Date.now();
-  if(now-lastMoveTime<120) return; // throttle (no rapid jumping)
-  lastMoveTime=now;
-
-  const btnRect=noBtn.getBoundingClientRect();
-  const cardRect=document.querySelector(".valentine-card").getBoundingClientRect();
-
-  const centerX=btnRect.left+btnRect.width/2;
-  const centerY=btnRect.top+btnRect.height/2;
-
-  let dx=centerX-mouseX;
-  let dy=centerY-mouseY;
-
-  const length=Math.hypot(dx,dy);
-  if(length===0) return;
-
-  dx/=length;
-  dy/=length;
-
-  const moveDistance=25; // VERY SMALL movement
-
-  let newX=btnRect.left+dx*moveDistance;
-  let newY=btnRect.top+dy*moveDistance;
-
-  const padding=20;
-
-  const minX=cardRect.left+padding;
-  const maxX=cardRect.right-btnRect.width-padding;
-  const minY=cardRect.top+90;
-  const maxY=cardRect.bottom-btnRect.height-40;
-
-  newX=Math.max(minX,Math.min(maxX,newX));
-  newY=Math.max(minY,Math.min(maxY,newY));
-
-  noBtn.style.left=newX+"px";
-  noBtn.style.top=newY+"px";
-}
-
-/* Cursor near detection */
-document.addEventListener("mousemove",(e)=>{
   if(answered) return;
 
-  const btnRect=noBtn.getBoundingClientRect();
-  const centerX=btnRect.left+btnRect.width/2;
-  const centerY=btnRect.top+btnRect.height/2;
+  const btnRect = noBtn.getBoundingClientRect();
+  const swarmRect = swarm.getBoundingClientRect();
 
-  const dist=Math.hypot(e.clientX-centerX,e.clientY-centerY);
+  const centerX = btnRect.left + btnRect.width/2;
+  const centerY = btnRect.top + btnRect.height/2;
 
-  if(dist<70){
-    moveSlight(e.clientX,e.clientY);
+  let dx = centerX - cursorX;
+  let dy = centerY - cursorY;
+
+  const length = Math.hypot(dx, dy);
+  if(length === 0) return;
+
+  dx /= length;
+  dy /= length;
+
+  const MOVE_DISTANCE = 45; // >20px guarantee
+
+  let newLeft = btnRect.left + dx * MOVE_DISTANCE;
+  let newTop  = btnRect.top  + dy * MOVE_DISTANCE;
+
+  const minLeft = swarmRect.left + 5;
+  const maxLeft = swarmRect.right - btnRect.width - 5;
+  const minTop  = swarmRect.top + 5;
+  const maxTop  = swarmRect.bottom - btnRect.height - 5;
+
+  newLeft = Math.max(minLeft, Math.min(maxLeft, newLeft));
+  newTop  = Math.max(minTop, Math.min(maxTop, newTop));
+
+  noBtn.style.left = (newLeft - swarmRect.left) + "px";
+  noBtn.style.top  = (newTop - swarmRect.top) + "px";
+  noBtn.style.transform = "none";
+}
+
+/* Detect cursor proximity */
+document.addEventListener("mousemove", function(e){
+
+  if(answered) return;
+
+  const rect = noBtn.getBoundingClientRect();
+  const dist = Math.hypot(
+    e.clientX - (rect.left + rect.width/2),
+    e.clientY - (rect.top + rect.height/2)
+  );
+
+  if(dist < 120){
+    moveAway(e.clientX, e.clientY);
   }
+
 });
 
-/* Prevent clicking NO */
-noBtn.addEventListener("click",(e)=>{
+/* Prevent any click chance */
+noBtn.addEventListener("mousedown", function(e){
   e.preventDefault();
+  moveAway(e.clientX, e.clientY);
+});
+
+noBtn.addEventListener("touchstart", function(e){
+  e.preventDefault();
+  const touch = e.touches[0];
+  moveAway(touch.clientX, touch.clientY);
+});
+
+noBtn.addEventListener("click", function(e){
+  e.preventDefault();
+  e.stopPropagation();
 });
 
 /* YES click */
-yesBtn.addEventListener("click",()=>{
-  answered=true;
-  question.innerHTML="You said YES! 💖";
-  yesBtn.style.display="none";
-  noBtn.style.display="none";
-  reveal.style.display="block";
+yesBtn.addEventListener("click", function(){
+  answered = true;
+  question.innerHTML = "You said YES! 💖";
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+  reveal.style.display = "block";
 });
 
-/* 🌸 More falling flowers */
-const symbols=["🌸","💖","💕","💘","🌹","💗","💞"];
+/* Floating hearts */
+const symbols = ["💖","💕","💘","🌸","🌹","💞","🥰"];
 
-setInterval(()=>{
-  const el=document.createElement("div");
-  el.className="fall";
-  el.innerHTML=symbols[Math.floor(Math.random()*symbols.length)];
-  el.style.left=Math.random()*100+"vw";
-  el.style.animationDuration=(Math.random()*4+4)+"s";
-  el.style.fontSize=(Math.random()*25+20)+"px";
+setInterval(function(){
+  const el = document.createElement("div");
+  el.className = "fall";
+  el.innerHTML = symbols[Math.floor(Math.random()*symbols.length)];
+  el.style.left = Math.random()*100 + "vw";
+  el.style.animationDuration = (Math.random()*4+4)+"s";
+  el.style.fontSize = (Math.random()*25+18)+"px";
   document.body.appendChild(el);
   setTimeout(()=>el.remove(),8000);
-},250); // MORE FREQUENT
+},300);
 
 })();
 </script>
