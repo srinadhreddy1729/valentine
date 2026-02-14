@@ -62,13 +62,11 @@ h1{
   margin-bottom:2.2rem;
 }
 
-/* Button container */
 .button-swarm{
   position:relative;
-  height:110px;
+  height:120px;
 }
 
-/* Buttons */
 .btn{
   position:absolute;
   border:none;
@@ -81,21 +79,16 @@ h1{
   white-space:nowrap;
 }
 
-/* YES button */
+/* First YES */
 #yesBtn{
   right:25px;
   top:50%;
   transform:translateY(-50%);
   background:linear-gradient(145deg,#ff4d6d,#e63256);
   color:white;
-  z-index:5;
 }
 
-#yesBtn:hover{
-  transform:translateY(-50%) scale(1.05);
-}
-
-/* NO button */
+/* First NO */
 #noBtn{
   left:25px;
   top:50%;
@@ -103,10 +96,26 @@ h1{
   background:#ffb7c5;
   color:#491d2b;
   transition:left 0.1s linear, top 0.1s linear;
-  z-index:10;
 }
 
-/* Reveal */
+/* Second buttons */
+#yesBtn2{
+  right:25px;
+  top:50%;
+  transform:translateY(-50%);
+  background:linear-gradient(145deg,#ff4d6d,#e63256);
+  color:white;
+}
+
+#noBtn2{
+  left:25px;
+  top:50%;
+  transform:translateY(-50%);
+  background:#ffb7c5;
+  color:#491d2b;
+  transition:left 0.1s linear, top 0.1s linear;
+}
+
 .reveal{
   display:none;
   margin-top:2rem;
@@ -128,222 +137,128 @@ h1{
   color:#982b52;
   margin-top:1rem;
 }
-
-/* Responsive - added comprehensive media queries */
-@media(max-width:768px){
-  h1{font-size:2rem;}
-  .btn{font-size:1.2rem;padding:14px 28px;}
-}
-
-@media(max-width:480px){
-  h1{font-size:1.6rem;}
-  .btn{font-size:1rem;padding:12px 22px;}
-}
-
-/* Additional responsive refinements */
-@media(max-width:400px){
-  .valentine-card{
-    padding:1.8rem 0.8rem;
-    border-radius:40px;
-  }
-  h1{
-    font-size:1.4rem;
-    margin-bottom:1.5rem;
-  }
-  .button-swarm{
-    height:90px;
-  }
-  #yesBtn{
-    right:15px;
-    padding:10px 18px;
-    font-size:0.9rem;
-  }
-  #noBtn{
-    left:15px;
-    padding:10px 18px;
-    font-size:0.9rem;
-  }
-  .couple{
-    font-size:3rem;
-  }
-  .love-text{
-    font-size:1.3rem;
-  }
-}
-
-@media(max-width:360px){
-  .btn{
-    padding:8px 14px;
-    font-size:0.8rem;
-  }
-  #yesBtn{
-    right:10px;
-  }
-  #noBtn{
-    left:10px;
-  }
-  .couple{
-    font-size:2.5rem;
-  }
-  .love-text{
-    font-size:1.1rem;
-  }
-}
-
-/* Tablet landscape and small desktops */
-@media(min-width:769px) and (max-width:1024px){
-  .valentine-card{
-    width:580px;
-    padding:2.5rem 1.2rem;
-  }
-  h1{
-    font-size:2.2rem;
-  }
-}
-
-/* Very small height adjustment */
-@media(max-height:600px){
-  .valentine-card{
-    padding:1.5rem 1rem;
-  }
-  h1{
-    margin-bottom:1rem;
-    font-size:1.8rem;
-  }
-  .button-swarm{
-    height:80px;
-  }
-}
-
-/* Large screens */
-@media(min-width:1400px){
-  .valentine-card{
-    width:700px;
-    padding:3.5rem 2rem;
-  }
-  h1{
-    font-size:2.8rem;
-  }
-  .btn{
-    font-size:1.6rem;
-    padding:18px 50px;
-  }
-  .couple{
-    font-size:5rem;
-  }
-  .love-text{
-    font-size:2.2rem;
-  }
-}
 </style>
 </head>
 <body>
 
 <div class="valentine-card">
-  <h1 id="question">Will you be my Valentine? 💌</h1>
 
-  <div class="button-swarm" id="swarm">
-    <button class="btn" id="noBtn">No 😘</button>
-    <button class="btn" id="yesBtn">Yes 💖</button>
+  <!-- FIRST QUESTION -->
+  <div id="card1">
+    <h1>Will you be my Valentine? 💌</h1>
+    <div class="button-swarm" id="swarm1">
+      <button class="btn" id="noBtn">No 😘</button>
+      <button class="btn" id="yesBtn">Yes 💖</button>
+    </div>
   </div>
 
-  <div class="reveal" id="reveal">
-    <div class="couple">💑💫</div>
-    <div class="love-text">Yay! You said YES 💖</div>
+  <!-- SECOND QUESTION -->
+  <div id="card2" style="display:none;">
+    <h1>Will you marry me? 💍</h1>
+    <div class="button-swarm" id="swarm2">
+      <button class="btn" id="noBtn2">No 😅</button>
+      <button class="btn" id="yesBtn2">Yes 💍</button>
+    </div>
   </div>
+
+  <!-- FINAL MESSAGE -->
+  <div class="reveal" id="finalMessage">
+    <div class="couple">💑✨💖</div>
+    <div class="love-text">
+      Forever starts today 💍💞 <br>
+      You & Me – Always Together ❤️
+    </div>
+  </div>
+
 </div>
 
 <script>
 (function(){
 
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const reveal = document.getElementById("reveal");
-const question = document.getElementById("question");
-const swarm = document.getElementById("swarm");
+let answered1 = false;
+let answered2 = false;
 
-let answered = false;
+function enableEscape(noBtn, swarm){
 
-/* Move NO button away from cursor */
-function moveAway(cursorX, cursorY){
+  function moveAway(cursorX, cursorY){
 
-  if(answered) return;
+    const btnRect = noBtn.getBoundingClientRect();
+    const swarmRect = swarm.getBoundingClientRect();
 
-  const btnRect = noBtn.getBoundingClientRect();
-  const swarmRect = swarm.getBoundingClientRect();
+    let dx = (btnRect.left + btnRect.width/2) - cursorX;
+    let dy = (btnRect.top + btnRect.height/2) - cursorY;
 
-  const centerX = btnRect.left + btnRect.width/2;
-  const centerY = btnRect.top + btnRect.height/2;
+    const length = Math.hypot(dx, dy);
+    if(length === 0) return;
 
-  let dx = centerX - cursorX;
-  let dy = centerY - cursorY;
+    dx /= length;
+    dy /= length;
 
-  const length = Math.hypot(dx, dy);
-  if(length === 0) return;
+    const MOVE_DISTANCE = 45;
 
-  dx /= length;
-  dy /= length;
+    let newLeft = btnRect.left + dx * MOVE_DISTANCE;
+    let newTop  = btnRect.top  + dy * MOVE_DISTANCE;
 
-  const MOVE_DISTANCE = 45; // >20px guarantee
+    const minLeft = swarmRect.left + 5;
+    const maxLeft = swarmRect.right - btnRect.width - 5;
+    const minTop  = swarmRect.top + 5;
+    const maxTop  = swarmRect.bottom - btnRect.height - 5;
 
-  let newLeft = btnRect.left + dx * MOVE_DISTANCE;
-  let newTop  = btnRect.top  + dy * MOVE_DISTANCE;
+    newLeft = Math.max(minLeft, Math.min(maxLeft, newLeft));
+    newTop  = Math.max(minTop, Math.min(maxTop, newTop));
 
-  const minLeft = swarmRect.left + 5;
-  const maxLeft = swarmRect.right - btnRect.width - 5;
-  const minTop  = swarmRect.top + 5;
-  const maxTop  = swarmRect.bottom - btnRect.height - 5;
-
-  newLeft = Math.max(minLeft, Math.min(maxLeft, newLeft));
-  newTop  = Math.max(minTop, Math.min(maxTop, newTop));
-
-  noBtn.style.left = (newLeft - swarmRect.left) + "px";
-  noBtn.style.top  = (newTop - swarmRect.top) + "px";
-  noBtn.style.transform = "none";
-}
-
-/* Detect cursor proximity */
-document.addEventListener("mousemove", function(e){
-
-  if(answered) return;
-
-  const rect = noBtn.getBoundingClientRect();
-  const dist = Math.hypot(
-    e.clientX - (rect.left + rect.width/2),
-    e.clientY - (rect.top + rect.height/2)
-  );
-
-  if(dist < 120){
-    moveAway(e.clientX, e.clientY);
+    noBtn.style.left = (newLeft - swarmRect.left) + "px";
+    noBtn.style.top  = (newTop - swarmRect.top) + "px";
+    noBtn.style.transform = "none";
   }
 
-});
+  document.addEventListener("mousemove", function(e){
+    const rect = noBtn.getBoundingClientRect();
+    const dist = Math.hypot(
+      e.clientX - (rect.left + rect.width/2),
+      e.clientY - (rect.top + rect.height/2)
+    );
+    if(dist < 120){
+      moveAway(e.clientX, e.clientY);
+    }
+  });
 
-/* Prevent any click chance */
-noBtn.addEventListener("mousedown", function(e){
-  e.preventDefault();
-  moveAway(e.clientX, e.clientY);
-});
+  noBtn.addEventListener("mousedown", function(e){
+    e.preventDefault();
+    moveAway(e.clientX, e.clientY);
+  });
 
-noBtn.addEventListener("touchstart", function(e){
-  e.preventDefault();
-  const touch = e.touches[0];
-  moveAway(touch.clientX, touch.clientY);
-});
+  noBtn.addEventListener("touchstart", function(e){
+    e.preventDefault();
+    const touch = e.touches[0];
+    moveAway(touch.clientX, touch.clientY);
+  });
+}
 
-noBtn.addEventListener("click", function(e){
-  e.preventDefault();
-  e.stopPropagation();
-});
+/* Enable escape for both NO buttons */
+enableEscape(
+  document.getElementById("noBtn"),
+  document.getElementById("swarm1")
+);
 
-/* YES click */
-yesBtn.addEventListener("click", function(){
-  answered = true;
-  question.innerHTML = "You said YES! 💖";
-  yesBtn.style.display = "none";
-  noBtn.style.display = "none";
-  reveal.style.display = "block";
-});
+enableEscape(
+  document.getElementById("noBtn2"),
+  document.getElementById("swarm2")
+);
+
+/* First YES */
+document.getElementById("yesBtn").onclick = function(){
+  answered1 = true;
+  document.getElementById("card1").style.display="none";
+  document.getElementById("card2").style.display="block";
+};
+
+/* Second YES */
+document.getElementById("yesBtn2").onclick = function(){
+  answered2 = true;
+  document.getElementById("card2").style.display="none";
+  document.getElementById("finalMessage").style.display="block";
+};
 
 /* Floating hearts */
 const symbols = ["💖","💕","💘","🌸","🌹","💞","🥰"];
